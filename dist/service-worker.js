@@ -15,6 +15,16 @@ const log = (message) => {
   console.log(`[ServiceWorker] ${message}`);
 };
 
+// Check if URL is valid for caching
+const isValidUrl = (url) => {
+  try {
+    const parsedUrl = new URL(url);
+    return ['http:', 'https:'].includes(parsedUrl.protocol);
+  } catch (e) {
+    return false;
+  }
+};
+
 // Cache essential assets during installation
 self.addEventListener('install', (event) => {
   log('Installing Service Worker...');
@@ -28,10 +38,15 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Improved fetch handling without Request reconstruction
+// Improved fetch handling with URL validation
 self.addEventListener('fetch', (event) => {
-  // Don't handle non-GET requests
+  // Only handle GET requests
   if (event.request.method !== 'GET') {
+    return;
+  }
+
+  // Check if the URL is valid for caching
+  if (!isValidUrl(event.request.url)) {
     return;
   }
 
@@ -47,8 +62,8 @@ self.addEventListener('fetch', (event) => {
         // If not in cache, try network
         const networkResponse = await fetch(event.request);
         
-        // Cache successful responses
-        if (networkResponse && networkResponse.status === 200) {
+        // Only cache valid responses from http(s) URLs
+        if (networkResponse && networkResponse.status === 200 && isValidUrl(event.request.url)) {
           const cache = await caches.open(CACHE_NAME);
           cache.put(event.request, networkResponse.clone());
           return networkResponse;
@@ -64,7 +79,6 @@ self.addEventListener('fetch', (event) => {
           }
         }
         
-        // If we can't handle the request, throw the error
         throw error;
       }
     })()
