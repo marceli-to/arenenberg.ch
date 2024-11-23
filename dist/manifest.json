@@ -1,19 +1,19 @@
 {
   "name": "Unterwegs am Arenenberg",
   "short_name": "Arenenberg",
-  "start_url": "/",
+  "start_url": "/dist/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "description": "Explore the stations of Arenenberg offline.",
   "icons": [
     {
-      "src": "/img/icons/android-chrome-192x192.png",
+      "src": "/dist/img/icons/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/img/icons/android-chrome-512x512.png",
+      "src": "/dist/img/icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

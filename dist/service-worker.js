@@ -5,14 +5,14 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
-        '/',
-        '/index.html',
-        '/manifest.json',
-        '/audio/kapelle.mp3',
-        '/audio/stall-der-zukunft.mp3',
-        '/audio/praezis-smart-digital.mp3',
-        '/audio/gartenbaukunst.mp3',
-        '/audio/a-la-francaise.mp3'
+        '/dist/',
+        '/dist/index.html',
+        '/dist/manifest.json',
+        '/dist/audio/kapelle.mp3',
+        '/dist/audio/stall-der-zukunft.mp3',
+        '/dist/audio/praezis-smart-digital.mp3',
+        '/dist/audio/gartenbaukunst.mp3',
+        '/dist/audio/a-la-francaise.mp3'
       ]);
     })
   );
@@ -48,7 +48,7 @@ self.addEventListener('fetch', (event) => {
       }).catch(() => {
         // If fetch fails, return a fallback response for navigation requests
         if (event.request.mode === 'navigate') {
-          return caches.match('/');
+          return caches.match('/dist/');
         }
       });
     })
