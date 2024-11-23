@@ -5,8 +5,11 @@ self.addEventListener('install', (event) => {
         '/',
         '/index.html',
         '/manifest.json',
-        '/src/main.js',
-        // Add other assets and routes you want to cache
+        '/audio/kapelle.mp3',
+        '/audio/stall-der-zukunft.mp3',
+        '/audio/praezis-smart-digital.mp3',
+        '/audio/gartenbaukunst.mp3',
+        '/audio/a-la-francaise.mp3'
       ])
     })
   )
