@@ -1,13 +1,13 @@
 const CACHE_NAME = 'arenenberg-cache-v1';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/audio/kapelle.mp3',
-  '/audio/stall-der-zukunft.mp3',
-  '/audio/praezis-smart-digital.mp3',
-  '/audio/gartenbaukunst.mp3',
-  '/audio/a-la-francaise.mp3'
+  '/stations/',
+  '/stations/index.html',
+  '/stations/manifest.json',
+  '/stations/audio/kapelle.mp3',
+  '/stations/audio/stall-der-zukunft.mp3',
+  '/stations/audio/praezis-smart-digital.mp3',
+  '/stations/audio/gartenbaukunst.mp3',
+  '/stations/audio/a-la-francaise.mp3'
 ];
 
 // Debug logging helper
@@ -45,11 +45,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Check if the URL is valid for caching
-  if (!isValidUrl(event.request.url)) {
-    return;
-  }
-
   event.respondWith(
     (async () => {
       // First try the cache
@@ -62,7 +57,7 @@ self.addEventListener('fetch', (event) => {
         // If not in cache, try network
         const networkResponse = await fetch(event.request);
         
-        // Only cache valid responses from http(s) URLs
+        // Only cache valid responses
         if (networkResponse && networkResponse.status === 200 && isValidUrl(event.request.url)) {
           const cache = await caches.open(CACHE_NAME);
           cache.put(event.request, networkResponse.clone());
@@ -73,7 +68,7 @@ self.addEventListener('fetch', (event) => {
       } catch (error) {
         // If it's a navigation request, return index.html
         if (event.request.mode === 'navigate') {
-          const indexResponse = await caches.match('/index.html');
+          const indexResponse = await caches.match('/stations/index.html');
           if (indexResponse) {
             return indexResponse;
           }
