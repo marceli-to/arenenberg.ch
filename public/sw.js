@@ -16,31 +16,7 @@ const ASSETS = [
   '/favicon.ico',
 ];
 
-// Add message port variable
-let messagePort = null;
-
-// Add message event listener for port initialization
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'INIT_PORT') {
-    messagePort = event.ports[0];
-  }
-});
-
-// Add notification function
-function notifyClientsOfCachingComplete() {
-  if (messagePort) {
-    messagePort.postMessage({
-      type: 'CACHING_COMPLETE'
-    });
-  }
-  self.clients.matchAll().then(clients => {
-    clients.forEach(client => {
-      client.postMessage({
-        type: 'CACHING_COMPLETE'
-      });
-    });
-  });
-}
+const NOTIFIER = document.querySelector('[data-loader]');
 
 // Immediately activate new service worker
 self.addEventListener('activate', event => {
@@ -80,7 +56,7 @@ self.addEventListener('install', event => {
           // Check if all assets were cached successfully
           const allSuccessful = results.every(result => result.status === 'fulfilled');
           if (allSuccessful) {
-            notifyClientsOfCachingComplete();
+            NOTIFIER.classList.add('success');            
           }
           
           // Log results of caching attempts

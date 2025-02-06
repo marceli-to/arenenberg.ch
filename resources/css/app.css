@@ -18,3 +18,12 @@ main {
 h1 {
   @apply text-lg font-bold;
 }
+
+/* Notifier */
+.notifier {
+  @apply fixed top-4 right-4 p-4 rounded-lg font-bold text-white bg-red-500;
+}
+
+.notifier.success {
+  @apply bg-green-500;
+}
