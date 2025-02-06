@@ -30,16 +30,26 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  
+  if (!request.url.startsWith('http')) {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) return cachedResponse;
-        return fetch(event.request).then(response => {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, response.clone());
-            return response;
-          });
-        });
-      })
+    caches.match(request)
+      .then(cachedResponse => cachedResponse || fetchAndCache(request))
+      .catch(() => fetch(request))
   );
 });
+
+async function fetchAndCache(request) {
+  const response = await fetch(request);
+  
+  if (response.ok && new URL(response.url).origin === location.origin) {
+    const cache = await caches.open(CACHE_NAME);
+    cache.put(request, response.clone());
+  }
+  
+  return response;
+}
