@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-v2-557ade949f94a449f7579ece686d3d57f8b908032c79d33ceb38daff8a7b0151';
+const CACHE_NAME = 'arenenberg-557ade949f94a449f7579ece686d3d57f8b908032c79d33ceb38daff8a7b0151';
 const ASSETS = [
   '/index.html',
   '/stationen/index.html',
