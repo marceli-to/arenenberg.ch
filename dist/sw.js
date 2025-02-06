@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-v2';
+const CACHE_NAME = 'arenenberg-557ade949f94a449f7579ece686d3d57f8b908032c79d33ceb38daff8a7b0151';
 const ASSETS = [
   '/index.html',
   '/stationen/index.html',
@@ -10,8 +10,8 @@ const ASSETS = [
   '/audio/kapelle.mp3',
   '/audio/praezis-smart-digital.mp3',
   '/audio/stall-der-zukunft.mp3',
-  '/css/app.css',
-  '/js/app.js',
+  '/build/assets/app-JpraZMAh.css',
+  '/build/assets/app-MratX3S_.js',
   '/favicon.ico',
   '/images/logo.svg',
   '/fonts/Inter.woff2'
