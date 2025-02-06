@@ -63,6 +63,8 @@ self.addEventListener('install', event => {
               console.error(`Failed to cache ${ASSETS[index]}`);
             } else {
               console.log(`Successfully cached ${ASSETS[index]}`);
+              const loader = client.document.querySelector('[data-loader]');
+              console.log(loader);
             }
           });
         });
