@@ -29,19 +29,22 @@ if ('serviceWorker' in navigator) {
         scope: '/'
       });
       
+      console.log('Registration state:', registration.active ? 'active' : 'inactive');
+      
       navigator.serviceWorker.addEventListener('message', (event) => {
-        console.log('Message received:', event.data);
-        // Add visible feedback for testing
-        document.body.insertAdjacentHTML('beforeend', 
-          `<div>SW Message: ${event.data}</div>`);
+        console.log('Page received:', event.data);
       });
 
-      // Send test message to SW
-      registration.active?.postMessage('Hello from page!');
+      // Wait for activation
+      if (registration.active) {
+        registration.active.postMessage('Test from page');
+        console.log('Test message sent');
+      } else {
+        console.log('SW not yet active');
+      }
       
-      console.log('SW registered:', registration);
     } catch (error) {
-      console.error('SW registration failed:', error);
+      console.error('Registration failed:', error);
     }
   });
 }
