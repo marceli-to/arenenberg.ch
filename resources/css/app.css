@@ -1,0 +1,20 @@
+@import "typo/webfonts.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] { display: none !important; }
+
+* {
+  font-variant-ligatures: none;
+}
+
+/* Global styles */
+main {
+  @apply flex-1;
+}
+
+h1 {
+  @apply text-lg font-bold;
+}
