@@ -17,7 +17,7 @@
 <meta property="twitter:image" content="https://arenenberg.ch.marceli.to/opengraph.jpg">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<meta name="csrf-token" content="v5WyLEmOPgGZrNopznIw0IkLHQfjjfvlNYjQYDxP">
+<meta name="csrf-token" content="mHQmhFqetdFLyRZ0LinnWxZDfDnTCiQJ7qUcaYfC">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,19 +55,22 @@ if ('serviceWorker' in navigator) {
         scope: '/'
       });
       
+      console.log('Registration state:', registration.active ? 'active' : 'inactive');
+      
       navigator.serviceWorker.addEventListener('message', (event) => {
-        console.log('Message received:', event.data);
-        // Add visible feedback for testing
-        document.body.insertAdjacentHTML('beforeend', 
-          `<div>SW Message: ${event.data}</div>`);
+        console.log('Page received:', event.data);
       });
 
-      // Send test message to SW
-      registration.active?.postMessage('Hello from page!');
+      // Wait for activation
+      if (registration.active) {
+        registration.active.postMessage('Test from page');
+        console.log('Test message sent');
+      } else {
+        console.log('SW not yet active');
+      }
       
-      console.log('SW registered:', registration);
     } catch (error) {
-      console.error('SW registration failed:', error);
+      console.error('Registration failed:', error);
     }
   });
 }

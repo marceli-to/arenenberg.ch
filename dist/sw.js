@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-07-52';
+const CACHE_NAME = 'arenenberg-2025-02-06-15-10-26';
 const ASSETS = [
   '/',
   '/index.html',
@@ -110,6 +110,9 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('message', (event) => {
-  console.log('SW received message:', event.data);
-  event.source?.postMessage('Message received by SW!');
+  console.log('SW received:', event.data);
+  if (event.source) {
+    event.source.postMessage('Response from SW');
+    console.log('SW sent response');
+  }
 });
