@@ -14,8 +14,6 @@ const ASSETS = [
   '/build/assets/app-DslcI84Y.css',
   '/build/assets/app-MratX3S_.js',
   '/favicon.ico',
-  '/images/logo.svg',
-  '/fonts/Inter.woff2'
 ];
 
 // Add message port variable
