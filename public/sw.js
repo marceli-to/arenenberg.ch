@@ -3,6 +3,8 @@ const ASSETS = [
   '/index.html',
   '/stationen/index.html',
   '/stationen/kapelle/index.html',
+  '/stationen/stall-der-zukunft/index.html',
+  '/stationen/gartenbaukunst/index.html',
   '/audio/a-la-francaise.mp3',
   '/audio/gartenbaukunst.mp3',
   '/audio/kapelle.mp3',
