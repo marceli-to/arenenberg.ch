@@ -12,9 +12,13 @@ if ('serviceWorker' in navigator) {
       });
       console.log('Registration state:', registration.active ? 'active' : 'inactive');
       
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        console.log('Page received:', event.data);
-      });
+      if (registration.active) {
+        console.log('ServiceWorker is active');
+        document.querySelector('[data-loader]').remove();
+      }
+      // navigator.serviceWorker.addEventListener('message', (event) => {
+      //   console.log('Page received:', event.data);
+      // });
 
       // navigator.serviceWorker.addEventListener('message', (event) => {
       //   if (event.data === 'CACHING_COMPLETE') {

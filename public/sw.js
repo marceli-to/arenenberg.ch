@@ -110,7 +110,6 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// In your service worker:
 self.addEventListener('message', (event) => {
   console.log('SW received:', event.data);
   if (event.source) {
