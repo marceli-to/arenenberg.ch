@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-13-47';
+const CACHE_NAME = 'arenenberg-2025-02-06-15-16-35';
 const ASSETS = [
   '/',
   '/index.html',
@@ -107,4 +107,13 @@ self.addEventListener('fetch', event => {
         });
       })
   );
+});
+
+// In your service worker:
+self.addEventListener('message', (event) => {
+  console.log('SW received:', event.data);
+  if (event.source) {
+    event.source.postMessage('Response from SW');
+    console.log('SW sent response');
+  }
 });
