@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-04-15';
+const CACHE_NAME = 'arenenberg-2025-02-06-15-07-24';
 const ASSETS = [
   '/',
   '/index.html',
@@ -11,7 +11,7 @@ const ASSETS = [
   '/audio/kapelle.mp3',
   '/audio/praezis-smart-digital.mp3',
   '/audio/stall-der-zukunft.mp3',
-  '/build/assets/app-OBfdi90-.css',
+  '/build/assets/app-B3ojfAnm.css',
   '/build/assets/app-MratX3S_.js',
   '/favicon.ico',
 ];
@@ -107,4 +107,9 @@ self.addEventListener('fetch', event => {
         });
       })
   );
+});
+
+self.addEventListener('message', (event) => {
+  console.log('SW received message:', event.data);
+  event.source?.postMessage('Message received by SW!');
 });

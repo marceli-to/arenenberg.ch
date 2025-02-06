@@ -17,19 +17,37 @@
 <meta property="twitter:image" content="https://arenenberg.ch.marceli.to/opengraph.jpg">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<meta name="csrf-token" content="GRL4NDfEpUcsj4GVdf1mz8luZhqmVaL6Dtp3pEeI">
+<meta name="csrf-token" content="CNsDTWwz93Q5K1GIv95SgagVIHRZ7UQlZsxLH3Vh">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<link rel="preload" as="style" href="https://arenenberg.ch.marceli.to/build/assets/app-OBfdi90-.css" /><link rel="stylesheet" href="https://arenenberg.ch.marceli.to/build/assets/app-OBfdi90-.css" /></head>
+<link rel="preload" as="style" href="https://arenenberg.ch.marceli.to/build/assets/app-B3ojfAnm.css" /><link rel="stylesheet" href="https://arenenberg.ch.marceli.to/build/assets/app-B3ojfAnm.css" /></head>
 
 <body class="bg-white text-black text-sm antialiased leading-[1.25] flex min-h-screen flex-col max-w-lg mx-auto">
 <div data-loader class="fixed top-4 right-4 p-4 rounded-lg font-bold text-white bg-red-500 transition-all duration-300">
   Inhalte werden geladen
 </div>
 <script>
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', async () => {
+//     try {
+//       const registration = await navigator.serviceWorker.register('/sw.js', {
+//         scope: '/'
+//       });
+      
+//       // Add message listener to receive messages from the service worker
+//       navigator.serviceWorker.addEventListener('message', function(event) {
+//         console.log('Received message from service worker:', event.data);
+//       });
+      
+//       console.log('ServiceWorker registration successful:', registration);
+//     } catch (error) {
+//       console.error('ServiceWorker registration failed:', error);
+//     }
+//   });
+// }
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
@@ -37,14 +55,19 @@ if ('serviceWorker' in navigator) {
         scope: '/'
       });
       
-      // Add message listener to receive messages from the service worker
-      navigator.serviceWorker.addEventListener('message', function(event) {
-        console.log('Received message from service worker:', event.data);
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        console.log('Message received:', event.data);
+        // Add visible feedback for testing
+        document.body.insertAdjacentHTML('beforeend', 
+          `<div>SW Message: ${event.data}</div>`);
       });
+
+      // Send test message to SW
+      registration.active?.postMessage('Hello from page!');
       
-      console.log('ServiceWorker registration successful:', registration);
+      console.log('SW registered:', registration);
     } catch (error) {
-      console.error('ServiceWorker registration failed:', error);
+      console.error('SW registration failed:', error);
     }
   });
 }
