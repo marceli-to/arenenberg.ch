@@ -49,11 +49,8 @@ self.addEventListener('install', event => {
           if (allSuccessful) {
             self.clients.matchAll().then(clients => {
               clients.forEach(client => {
-                // Find the loader element and update it
-                const loader = client.document.querySelector('[data-loader]');
-                if (loader) {
-                  loader.classList.add('success');
-                }
+                console.log(client);
+                console.log('all done');
               });
             });
           }
