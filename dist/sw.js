@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-18-43';
+const CACHE_NAME = 'arenenberg-2025-02-06-15-20-43';
 const ASSETS = [
   '/',
   '/index.html',
@@ -51,6 +51,7 @@ self.addEventListener('install', event => {
             // Broadcast success message to all clients
             self.clients.matchAll().then(clients => {
               clients.forEach(client => {
+                console.log('Posting message to client:', client);
                 client.postMessage('CACHING_COMPLETE');
               });
             });
