@@ -76,10 +76,10 @@ class Deploy extends Command
     $htmlContent = file_get_contents($htmlPath);
 
     // search app-xxx.css
-    preg_match_all('/app-([A-Za-z0-9_]+)\.css/', $htmlContent, $matchesCss);
+    preg_match_all('/app-([A-Za-z0-9_-]+)\.css/', $htmlContent, $matchesCss);
 
     // search app-xxx.js
-    preg_match_all('/app-([A-Za-z0-9_]+)\.js/', $htmlContent, $matchesJs);
+    preg_match_all('/app-([A-Za-z0-9_-]+)\.js/', $htmlContent, $matchesJs);
 
     // Get the service worker content
     $swPath = $distPath . '/sw.js';
