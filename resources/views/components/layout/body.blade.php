@@ -8,6 +8,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
       const registrations = await navigator.serviceWorker.getRegistrations();
+      console.log('ServiceWorker registrations:', registrations);
       for (const registration of registrations) {
         await registration.unregister();
       }
@@ -15,7 +16,7 @@ if ('serviceWorker' in navigator) {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       });
-      
+
       console.log('Registration state:', registration.active ? 'active' : 'inactive');
       console.log('ServiceWorker registration successful:', registration);
 
