@@ -47,12 +47,12 @@ self.addEventListener('install', event => {
         ).then(results => {
           const allSuccessful = results.every(result => result.status === 'fulfilled');
           if (allSuccessful) {
-            self.clients.matchAll().then(clients => {
-              clients.forEach(client => {
-                console.log(client);
-                console.log('all done');
-              });
-            });
+            console.log('all done');
+            // self.clients.matchAll().then(clients => {
+            //   clients.forEach(client => {
+            //     console.log(client);
+            //   });
+            // });
           }
           
           results.forEach((result, index) => {
