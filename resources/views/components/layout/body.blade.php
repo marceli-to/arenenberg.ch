@@ -11,23 +11,25 @@ if ('serviceWorker' in navigator) {
         scope: '/'
       });
       console.log('Registration state:', registration.active ? 'active' : 'inactive');
-      
-      if (registration.active) {
-        console.log('ServiceWorker is active');
-        document.querySelector('[data-loader]').remove();
-      }
-      // navigator.serviceWorker.addEventListener('message', (event) => {
-      //   console.log('Page received:', event.data);
-      // });
-
-      // navigator.serviceWorker.addEventListener('message', (event) => {
-      //   if (event.data === 'CACHING_COMPLETE') {
-      //     console.log('All assets cached successfully');
-      //     // Handle UI updates or other actions here
-      //   }
-      // });
-      
       console.log('ServiceWorker registration successful:', registration);
+
+      // Setup message listener
+      navigator.serviceWorker.addEventListener('message', event => {
+        console.log('Client received:', event.data);
+      });
+      
+      // Send initial ping
+      if (registration.active) {
+        registration.active.postMessage('CLIENT_READY');
+      } else {
+        registration.addEventListener('updatefound', () => {
+          registration.installing.addEventListener('statechange', () => {
+            if (registration.active) {
+              registration.active.postMessage('CLIENT_READY');
+            }
+          });
+        });
+      }
     } catch (error) {
       console.error('ServiceWorker registration failed:', error);
     }

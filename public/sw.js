@@ -51,7 +51,6 @@ self.addEventListener('install', event => {
             // Broadcast success message to all clients
             self.clients.matchAll().then(clients => {
               clients.forEach(client => {
-                console.log('Posting message to client:', client);
                 client.postMessage('CACHING_COMPLETE');
               });
             });
@@ -113,7 +112,11 @@ self.addEventListener('fetch', event => {
 self.addEventListener('message', (event) => {
   console.log('SW received:', event.data);
   if (event.source) {
-    event.source.postMessage('Response from SW');
-    console.log('SW sent response');
+    try {
+      event.source.postMessage(`ACK: ${event.data}`);
+      console.log('SW sent response');
+    } catch (error) {
+      console.error('Failed to post message:', error);
+    }
   }
 });
