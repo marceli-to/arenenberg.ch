@@ -10,6 +10,9 @@ const ASSETS = [
   '/audio/stall-der-zukunft.mp3',
   '/build/assets/app-JpraZMAh.css',
   '/build/assets/app-MratX3S_.js',
+  '/favicon.ico',
+  '/images/logo.svg',
+  '/fonts/Inter.woff2'
 ];
 
 self.addEventListener('install', (event) => {
