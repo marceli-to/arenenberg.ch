@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-39-39';
+const CACHE_NAME = 'arenenberg-cache';
 const ASSETS = [
   '/',
   '/index.html',
@@ -32,41 +32,80 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('install', event => {
   self.skipWaiting();
-  
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return Promise.allSettled(
-          ASSETS.map(asset => {
-            return cache.add(asset)
-              .catch(error => {
-                console.error(`Failed to cache ${asset}:`, error);
-                throw error;
+    caches.has(CACHE_NAME).then(hasCache => {
+      if (!hasCache) {
+        return caches.open(CACHE_NAME).then(cache => {
+          return Promise.allSettled(
+            ASSETS.map(asset => {
+              return cache.add(asset)
+                .catch(error => {
+                  console.error(`Failed to cache ${asset}:`, error);
+                  throw error;
+                });
+            })
+          ).then(results => {
+            const allSuccessful = results.every(result => result.status === 'fulfilled');
+            if (allSuccessful) {
+              console.log('all done now really. pinky promise!');
+              // Broadcast success message to all clients
+              self.clients.matchAll().then(clients => {
+                clients.forEach(client => {
+                  client.postMessage('CACHING_COMPLETE');
+                });
               });
-          })
-        ).then(results => {
-          const allSuccessful = results.every(result => result.status === 'fulfilled');
-          if (allSuccessful) {
-            console.log('all done now really. pinky promise!');
-            // Broadcast success message to all clients
-            self.clients.matchAll().then(clients => {
-              clients.forEach(client => {
-                client.postMessage('CACHING_COMPLETE');
-              });
-            });
-          }
-          
-          results.forEach((result, index) => {
-            if (result.status === 'rejected') {
-              console.error(`Failed to cache ${ASSETS[index]}`);
-            } else {
-              console.log(`Successfully cached ${ASSETS[index]}`);
             }
+            
+            results.forEach((result, index) => {
+              if (result.status === 'rejected') {
+                console.error(`Failed to cache ${ASSETS[index]}`);
+              } else {
+                console.log(`Successfully cached ${ASSETS[index]}`);
+              }
+            });
           });
         });
-      })
+      }
+    })
   );
 });
+
+// self.addEventListener('install', event => {
+//   self.skipWaiting();
+//   event.waitUntil(
+//     caches.open(CACHE_NAME)
+//       .then(cache => {
+//         return Promise.allSettled(
+//           ASSETS.map(asset => {
+//             return cache.add(asset)
+//               .catch(error => {
+//                 console.error(`Failed to cache ${asset}:`, error);
+//                 throw error;
+//               });
+//           })
+//         ).then(results => {
+//           const allSuccessful = results.every(result => result.status === 'fulfilled');
+//           if (allSuccessful) {
+//             console.log('all done now really. pinky promise!');
+//             // Broadcast success message to all clients
+//             self.clients.matchAll().then(clients => {
+//               clients.forEach(client => {
+//                 client.postMessage('CACHING_COMPLETE');
+//               });
+//             });
+//           }
+          
+//           results.forEach((result, index) => {
+//             if (result.status === 'rejected') {
+//               console.error(`Failed to cache ${ASSETS[index]}`);
+//             } else {
+//               console.log(`Successfully cached ${ASSETS[index]}`);
+//             }
+//           });
+//         });
+//       })
+//   );
+// });
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
