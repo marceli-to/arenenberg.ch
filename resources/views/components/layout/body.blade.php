@@ -4,40 +4,24 @@
   Inhalte werden geladen
 </div>
 <script>
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', async () => {
-//     try {
-//       const registration = await navigator.serviceWorker.register('/sw.js', {
-//         scope: '/'
-//       });
-      
-//       // Add message listener to receive messages from the service worker
-//       navigator.serviceWorker.addEventListener('message', function(event) {
-//         console.log('Received message from service worker:', event.data);
-//       });
-      
-//       console.log('ServiceWorker registration successful:', registration);
-//     } catch (error) {
-//       console.error('ServiceWorker registration failed:', error);
-//     }
-//   });
-// }
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       });
-      
+    
+
       navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data === 'CACHING_COMPLETE') {
           console.log('All assets cached successfully');
           // Handle UI updates or other actions here
         }
       });
-     
+      
+      console.log('ServiceWorker registration successful:', registration);
     } catch (error) {
-      console.error('Registration failed:', error);
+      console.error('ServiceWorker registration failed:', error);
     }
   });
 }
