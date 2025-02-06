@@ -11,12 +11,38 @@ const ASSETS = [
   '/audio/kapelle.mp3',
   '/audio/praezis-smart-digital.mp3',
   '/audio/stall-der-zukunft.mp3',
-  '/build/assets/app-JpraZMAh.css',
+  '/build/assets/app-DslcI84Y.css',
   '/build/assets/app-MratX3S_.js',
   '/favicon.ico',
   '/images/logo.svg',
   '/fonts/Inter.woff2'
 ];
+
+// Add message port variable
+let messagePort = null;
+
+// Add message event listener for port initialization
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'INIT_PORT') {
+    messagePort = event.ports[0];
+  }
+});
+
+// Add notification function
+function notifyClientsOfCachingComplete() {
+  if (messagePort) {
+    messagePort.postMessage({
+      type: 'CACHING_COMPLETE'
+    });
+  }
+  self.clients.matchAll().then(clients => {
+    clients.forEach(client => {
+      client.postMessage({
+        type: 'CACHING_COMPLETE'
+      });
+    });
+  });
+}
 
 // Immediately activate new service worker
 self.addEventListener('activate', event => {
@@ -53,6 +79,12 @@ self.addEventListener('install', event => {
               });
           })
         ).then(results => {
+          // Check if all assets were cached successfully
+          const allSuccessful = results.every(result => result.status === 'fulfilled');
+          if (allSuccessful) {
+            notifyClientsOfCachingComplete();
+          }
+          
           // Log results of caching attempts
           results.forEach((result, index) => {
             if (result.status === 'rejected') {
