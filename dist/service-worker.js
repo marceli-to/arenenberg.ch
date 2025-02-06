@@ -32,7 +32,11 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then((cache) => {
         log('Caching static assets...');
+        // Attempt to cache all static assets
         return cache.addAll(STATIC_ASSETS);
+      })
+      .catch((error) => {
+        log('Error pre-caching static assets: ' + error);
       })
       .then(() => self.skipWaiting())
   );
