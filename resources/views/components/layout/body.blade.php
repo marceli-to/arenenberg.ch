@@ -14,6 +14,9 @@ if ('serviceWorker' in navigator) {
     } catch (error) {
       console.error('ServiceWorker registration failed:', error);
     }
+    navigator.serviceWorker.addEventListener('message', function(event) {
+      console.log("Got reply from service worker: " + event.data);
+    });
   });
 }
 </script>
