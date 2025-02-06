@@ -17,7 +17,7 @@
 <meta property="twitter:image" content="https://arenenberg.ch.marceli.to/opengraph.jpg">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<meta name="csrf-token" content="nh3E1POzwi5MvHoFUu42U60uQ49WaqP2kGqd6tR9">
+<meta name="csrf-token" content="dz4rdkLoHwVkKzpNGNy7cD3LBeA7IUxwFZNxI5tW">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
@@ -40,6 +40,9 @@ if ('serviceWorker' in navigator) {
     } catch (error) {
       console.error('ServiceWorker registration failed:', error);
     }
+    navigator.serviceWorker.addEventListener('message', function(event) {
+      console.log("Got reply from service worker: " + event.data);
+    });
   });
 }
 </script>
