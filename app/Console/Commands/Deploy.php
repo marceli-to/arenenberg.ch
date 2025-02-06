@@ -100,7 +100,7 @@ class Deploy extends Command
     // create hash
     $key = 'arenenberg-v2';
     $hash = hash('sha256', $key);
-    $swContent = str_replace($key, "arenenberg-v2-{$hash}", $swContent);
+    $swContent = str_replace($key, "arenenberg-{$hash}", $swContent);
 
     file_put_contents($swPath, $swContent);
     $this->info("Updated CACHE_NAME in service worker");
