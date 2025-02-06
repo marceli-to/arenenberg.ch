@@ -105,7 +105,7 @@ class Deploy extends Command
     // create hash
     $key = 'arenenberg-cache';
     // generate unique hash
-    $hash = Str::random(20);
+    $hash = \Str::random(20);
 
     $swContent = str_replace($key, "arenenberg-{$hash}", $swContent);
 
