@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-audio-cache-v4';
+const CACHE_NAME = 'arenenberg-audio-cache-v6';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
