@@ -10,14 +10,18 @@ if ('serviceWorker' in navigator) {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       });
-    
-
+      console.log('Registration state:', registration.active ? 'active' : 'inactive');
+      
       navigator.serviceWorker.addEventListener('message', (event) => {
-        if (event.data === 'CACHING_COMPLETE') {
-          console.log('All assets cached successfully');
-          // Handle UI updates or other actions here
-        }
+        console.log('Page received:', event.data);
       });
+
+      // navigator.serviceWorker.addEventListener('message', (event) => {
+      //   if (event.data === 'CACHING_COMPLETE') {
+      //     console.log('All assets cached successfully');
+      //     // Handle UI updates or other actions here
+      //   }
+      // });
       
       console.log('ServiceWorker registration successful:', registration);
     } catch (error) {
