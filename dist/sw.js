@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-W1QS3yTlOX1pYyBPBuW5';
+const CACHE_NAME = 'arenenberg-gOO8o0oXjUp4UXLFkBWe';
 const ASSETS = [
   '/',
   '/index.html',
