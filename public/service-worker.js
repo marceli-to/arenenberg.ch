@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-cache-v1';
+const CACHE_NAME = 'arenenberg-audio-cache-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -40,6 +40,23 @@ self.addEventListener('install', (event) => {
 
 // Improved fetch handling with URL validation
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+  
+  // Special handling for audio files
+  if (url.pathname.startsWith('/audio/')) {
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        return cached || fetch(event.request).then((response) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, response.clone());
+            return response;
+          });
+        });
+      })
+    );
+    return;
+  }
+  
   // Only handle GET requests
   if (event.request.method !== 'GET') {
     return;
@@ -83,17 +100,11 @@ self.addEventListener('fetch', (event) => {
 // Clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    Promise.all([
-      caches.keys().then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (cacheName !== CACHE_NAME) {
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      }),
-      self.clients.claim()
-    ])
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
+      );
+    })
   );
 });
