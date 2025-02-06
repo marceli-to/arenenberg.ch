@@ -47,7 +47,12 @@ self.addEventListener('install', event => {
         ).then(results => {
           const allSuccessful = results.every(result => result.status === 'fulfilled');
           if (allSuccessful) {
-            console.log('all done now really. pinky promise!');
+            self.clients.matchAll().then(clients => {
+              clients.forEach(client => {
+                //console.log(client);
+                client.postMessage("Responding to " + event.data);
+              });
+            });
           }
           
           results.forEach((result, index) => {
