@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-3gu1IouCxVhQsGtN25xN';
+const CACHE_NAME = 'arenenberg-oNsRQD4N51hr9uFJp489';
 const ASSETS = [
   '/',
   '/index.html',
@@ -47,7 +47,12 @@ self.addEventListener('install', event => {
         ).then(results => {
           const allSuccessful = results.every(result => result.status === 'fulfilled');
           if (allSuccessful) {
-            console.log('all done now really. pinky promise!');
+            self.clients.matchAll().then(clients => {
+              clients.forEach(client => {
+                //console.log(client);
+                client.postMessage("Responding to " + event.data);
+              });
+            });
           }
           
           results.forEach((result, index) => {
