@@ -17,13 +17,13 @@
 <meta property="twitter:image" content="https://arenenberg.ch.marceli.to/opengraph.jpg">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<meta name="csrf-token" content="mHQmhFqetdFLyRZ0LinnWxZDfDnTCiQJ7qUcaYfC">
+<meta name="csrf-token" content="3jUnjRlI7Ax5M4H9UmihOqoHxvwlzjMYFK9i6CHq">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<link rel="preload" as="style" href="https://arenenberg.ch.marceli.to/build/assets/app-B3ojfAnm.css" /><link rel="stylesheet" href="https://arenenberg.ch.marceli.to/build/assets/app-B3ojfAnm.css" /></head>
+<link rel="preload" as="style" href="https://arenenberg.ch.marceli.to/build/assets/app-OBfdi90-.css" /><link rel="stylesheet" href="https://arenenberg.ch.marceli.to/build/assets/app-OBfdi90-.css" /></head>
 
 <body class="bg-white text-black text-sm antialiased leading-[1.25] flex min-h-screen flex-col max-w-lg mx-auto">
 <div data-loader class="fixed top-4 right-4 p-4 rounded-lg font-bold text-white bg-red-500 transition-all duration-300">
@@ -55,20 +55,13 @@ if ('serviceWorker' in navigator) {
         scope: '/'
       });
       
-      console.log('Registration state:', registration.active ? 'active' : 'inactive');
-      
       navigator.serviceWorker.addEventListener('message', (event) => {
-        console.log('Page received:', event.data);
+        if (event.data === 'CACHING_COMPLETE') {
+          console.log('All assets cached successfully');
+          // Handle UI updates or other actions here
+        }
       });
-
-      // Wait for activation
-      if (registration.active) {
-        registration.active.postMessage('Test from page');
-        console.log('Test message sent');
-      } else {
-        console.log('SW not yet active');
-      }
-      
+     
     } catch (error) {
       console.error('Registration failed:', error);
     }

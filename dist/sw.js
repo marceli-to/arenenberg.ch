@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-10-26';
+const CACHE_NAME = 'arenenberg-2025-02-06-15-13-47';
 const ASSETS = [
   '/',
   '/index.html',
@@ -11,7 +11,7 @@ const ASSETS = [
   '/audio/kapelle.mp3',
   '/audio/praezis-smart-digital.mp3',
   '/audio/stall-der-zukunft.mp3',
-  '/build/assets/app-B3ojfAnm.css',
+  '/build/assets/app-OBfdi90-.css',
   '/build/assets/app-MratX3S_.js',
   '/favicon.ico',
 ];
@@ -51,7 +51,7 @@ self.addEventListener('install', event => {
             // Broadcast success message to all clients
             self.clients.matchAll().then(clients => {
               clients.forEach(client => {
-                client.postMessage('Service Worker: Installation complete!');
+                client.postMessage('CACHING_COMPLETE');
               });
             });
           }
@@ -107,12 +107,4 @@ self.addEventListener('fetch', event => {
         });
       })
   );
-});
-
-self.addEventListener('message', (event) => {
-  console.log('SW received:', event.data);
-  if (event.source) {
-    event.source.postMessage('Response from SW');
-    console.log('SW sent response');
-  }
 });
