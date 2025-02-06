@@ -1,13 +1,13 @@
 const CACHE_NAME = 'arenenberg-cache-v1';
 const STATIC_ASSETS = [
-  '/stations/',
-  '/stations/index.html',
-  '/stations/manifest.json',
-  '/stations/audio/kapelle.mp3',
-  '/stations/audio/stall-der-zukunft.mp3',
-  '/stations/audio/praezis-smart-digital.mp3',
-  '/stations/audio/gartenbaukunst.mp3',
-  '/stations/audio/a-la-francaise.mp3'
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/audio/kapelle.mp3',
+  '/audio/stall-der-zukunft.mp3',
+  '/audio/praezis-smart-digital.mp3',
+  '/audio/gartenbaukunst.mp3',
+  '/audio/a-la-francaise.mp3'
 ];
 
 // Debug logging helper
@@ -68,7 +68,7 @@ self.addEventListener('fetch', (event) => {
       } catch (error) {
         // If it's a navigation request, return index.html
         if (event.request.mode === 'navigate') {
-          const indexResponse = await caches.match('/stations/index.html');
+          const indexResponse = await caches.match('/index.html');
           if (indexResponse) {
             return indexResponse;
           }
