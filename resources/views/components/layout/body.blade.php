@@ -1,4 +1,5 @@
 <body class="bg-white text-black text-sm antialiased leading-[1.25] flex min-h-screen flex-col max-w-lg mx-auto">
+@if (Request::routeIs('page.home'))
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -8,6 +9,7 @@
     });
   }
 </script>
+@endif
 {{ $slot }}
 @vite('resources/js/app.js')
 </body>
