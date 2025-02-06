@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-00-12';
+const CACHE_NAME = 'arenenberg-2025-02-06-15-01-18';
 const ASSETS = [
   '/',
   '/index.html',

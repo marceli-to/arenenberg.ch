@@ -17,7 +17,7 @@
 <meta property="twitter:image" content="https://arenenberg.ch.marceli.to/opengraph.jpg">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<meta name="csrf-token" content="dz4rdkLoHwVkKzpNGNy7cD3LBeA7IUxwFZNxI5tW">
+<meta name="csrf-token" content="CEg7DNYA2323SAxHvuAjkDUnqOyRnJOTLwvDIcLe">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
@@ -36,13 +36,13 @@ if ('serviceWorker' in navigator) {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       });
+      navigator.serviceWorker.addEventListener('message', function(event) {
+        console.log("Got reply from service worker: " + event.data);
+      });
       console.log('ServiceWorker registration successful:', registration);
     } catch (error) {
       console.error('ServiceWorker registration failed:', error);
     }
-    navigator.serviceWorker.addEventListener('message', function(event) {
-      console.log("Got reply from service worker: " + event.data);
-    });
   });
 }
 </script>
