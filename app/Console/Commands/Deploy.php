@@ -103,8 +103,10 @@ class Deploy extends Command
 
     // Update 'arenenberg-v2' in service worker with a unique version number
     // create hash
-    $key = 'arenenberg-v2';
-    $hash = hash('sha256', $key);
+    $key = 'arenenberg-cache';
+    // generate unique hash
+    $hash = Str::random(20);
+
     $swContent = str_replace($key, "arenenberg-{$hash}", $swContent);
 
     file_put_contents($swPath, $swContent);

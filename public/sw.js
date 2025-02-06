@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-v2';
+const CACHE_NAME = 'arenenberg-cache';
 const ASSETS = [
   '/',
   '/index.html',
