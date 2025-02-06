@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-2025-02-06-15-01-18';
+const CACHE_NAME = 'arenenberg-2025-02-06-15-04-15';
 const ASSETS = [
   '/',
   '/index.html',
@@ -48,9 +48,12 @@ self.addEventListener('install', event => {
           const allSuccessful = results.every(result => result.status === 'fulfilled');
           if (allSuccessful) {
             console.log('all done now really. pinky promise!');
-            self.clients.matchAll().then(all => all.forEach(client => {
-              client.postMessage("Responding to " + event.data);
-            }));
+            // Broadcast success message to all clients
+            self.clients.matchAll().then(clients => {
+              clients.forEach(client => {
+                client.postMessage('Service Worker: Installation complete!');
+              });
+            });
           }
           
           results.forEach((result, index) => {
