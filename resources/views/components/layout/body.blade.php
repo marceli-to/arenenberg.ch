@@ -43,6 +43,7 @@ if ('serviceWorker' in navigator) {
 @endif
 {{ $slot }}
 @vite('resources/js/app.js')
+@vite('resources/js/sw.js')
 </body>
 </html>
 <!-- made with ❤ by bivgrafik.ch & marceli.to -->
