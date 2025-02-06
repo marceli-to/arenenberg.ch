@@ -1,6 +1,6 @@
 const CACHE_NAME = 'arenenberg-557ade949f94a449f7579ece686d3d57f8b908032c79d33ceb38daff8a7b0151';
 const ASSETS = [
-  '/',  // Add root path
+  '/',
   '/index.html',
   '/stationen/index.html',
   '/stationen/kapelle/index.html',
@@ -11,16 +11,12 @@ const ASSETS = [
   '/audio/kapelle.mp3',
   '/audio/praezis-smart-digital.mp3',
   '/audio/stall-der-zukunft.mp3',
-  '/build/assets/app-B2hbCIhY.css',
+  '/css/app.css',
   '/build/assets/app-MratX3S_.js',
   '/favicon.ico',
 ];
 
-const NOTIFIER = document.querySelector('[data-loader]');
-
-// Immediately activate new service worker
 self.addEventListener('activate', event => {
-  // Remove old caches
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -29,37 +25,39 @@ self.addEventListener('activate', event => {
           .map(cacheName => caches.delete(cacheName))
       );
     }).then(() => {
-      // Take control of all pages immediately
       return self.clients.claim();
     })
   );
 });
 
 self.addEventListener('install', event => {
-  // Skip waiting to activate immediately
   self.skipWaiting();
   
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        // Cache all assets with proper error handling
         return Promise.allSettled(
           ASSETS.map(asset => {
             return cache.add(asset)
               .catch(error => {
                 console.error(`Failed to cache ${asset}:`, error);
-                // Re-throw to mark this asset as rejected
                 throw error;
               });
           })
         ).then(results => {
-          // Check if all assets were cached successfully
           const allSuccessful = results.every(result => result.status === 'fulfilled');
           if (allSuccessful) {
-            NOTIFIER.classList.add('success');            
+            self.clients.matchAll().then(clients => {
+              clients.forEach(client => {
+                // Find the loader element and update it
+                const loader = client.document.querySelector('[data-loader]');
+                if (loader) {
+                  loader.classList.add('success');
+                }
+              });
+            });
           }
           
-          // Log results of caching attempts
           results.forEach((result, index) => {
             if (result.status === 'rejected') {
               console.error(`Failed to cache ${ASSETS[index]}`);
@@ -73,33 +71,25 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // Only handle GET requests
   if (event.request.method !== 'GET') return;
-
   const url = new URL(event.request.url);
   
-  // Only handle same-origin requests
   if (url.origin !== self.location.origin) return;
-
+  
   event.respondWith(
     caches.match(event.request)
       .then(cachedResponse => {
         if (cachedResponse) {
-          // Return cached response
           return cachedResponse;
         }
 
-        // If not in cache, fetch from network
         return fetch(event.request)
           .then(response => {
-            // Check if we received a valid response
             if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
             }
 
-            // Clone the response since we need to use it twice
             const responseToCache = response.clone();
-
             caches.open(CACHE_NAME)
               .then(cache => {
                 cache.put(event.request, responseToCache);
@@ -112,7 +102,6 @@ self.addEventListener('fetch', event => {
           });
       })
       .catch(() => {
-        // If both cache and network fail, return a fallback response
         console.error('Both cache and network failed');
         return new Response('Network and cache both failed', {
           status: 503,
