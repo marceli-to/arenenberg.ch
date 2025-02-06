@@ -29,20 +29,13 @@ if ('serviceWorker' in navigator) {
         scope: '/'
       });
       
-      console.log('Registration state:', registration.active ? 'active' : 'inactive');
-      
       navigator.serviceWorker.addEventListener('message', (event) => {
-        console.log('Page received:', event.data);
+        if (event.data === 'CACHING_COMPLETE') {
+          console.log('All assets cached successfully');
+          // Handle UI updates or other actions here
+        }
       });
-
-      // Wait for activation
-      if (registration.active) {
-        registration.active.postMessage('Test from page');
-        console.log('Test message sent');
-      } else {
-        console.log('SW not yet active');
-      }
-      
+     
     } catch (error) {
       console.error('Registration failed:', error);
     }

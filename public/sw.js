@@ -51,7 +51,7 @@ self.addEventListener('install', event => {
             // Broadcast success message to all clients
             self.clients.matchAll().then(clients => {
               clients.forEach(client => {
-                client.postMessage('Service Worker: Installation complete!');
+                client.postMessage('CACHING_COMPLETE');
               });
             });
           }
@@ -107,12 +107,4 @@ self.addEventListener('fetch', event => {
         });
       })
   );
-});
-
-self.addEventListener('message', (event) => {
-  console.log('SW received:', event.data);
-  if (event.source) {
-    event.source.postMessage('Response from SW');
-    console.log('SW sent response');
-  }
 });
