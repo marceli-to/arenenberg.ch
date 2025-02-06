@@ -10,9 +10,12 @@ if ('serviceWorker' in navigator) {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       });
+      
+      // Add message listener to receive messages from the service worker
       navigator.serviceWorker.addEventListener('message', function(event) {
-        console.log("Got reply from service worker: " + event.data);
+        console.log('Received message from service worker:', event.data);
       });
+      
       console.log('ServiceWorker registration successful:', registration);
     } catch (error) {
       console.error('ServiceWorker registration failed:', error);
