@@ -101,18 +101,16 @@ class Deploy extends Command
       $this->info("Updated JS path in service worker");
     }
 
-    // Update 'arenenberg-v2' in service worker with a unique version number
+    // Update 'arenenberg-cache' in service worker with a unique version number
     // create hash
-    $key = 'arenenberg-cache';
-    // generate unique hash
-    $hash = \Str::random(20);
+    // $key = 'arenenberg-cache';
 
-    // use datetime string a hash
-    $hash = date('Y-m-d-H-i-s', time());
+    // // use datetime string a hash
+    // $hash = date('Y-m-d-H-i-s', time());
 
-    $swContent = str_replace($key, "arenenberg-{$hash}", $swContent);
+    // $swContent = str_replace($key, "arenenberg-{$hash}", $swContent);
 
-    file_put_contents($swPath, $swContent);
-    $this->info("Updated CACHE_NAME in service worker");
+    // file_put_contents($swPath, $swContent);
+    // $this->info("Updated CACHE_NAME in service worker");
   }
 }
