@@ -4,6 +4,24 @@
   Inhalte werden geladen
 </div>
 <script>
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', async () => {
+//     try {
+//       const registration = await navigator.serviceWorker.register('/sw.js', {
+//         scope: '/'
+//       });
+      
+//       // Add message listener to receive messages from the service worker
+//       navigator.serviceWorker.addEventListener('message', function(event) {
+//         console.log('Received message from service worker:', event.data);
+//       });
+      
+//       console.log('ServiceWorker registration successful:', registration);
+//     } catch (error) {
+//       console.error('ServiceWorker registration failed:', error);
+//     }
+//   });
+// }
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
@@ -11,14 +29,19 @@ if ('serviceWorker' in navigator) {
         scope: '/'
       });
       
-      // Add message listener to receive messages from the service worker
-      navigator.serviceWorker.addEventListener('message', function(event) {
-        console.log('Received message from service worker:', event.data);
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        console.log('Message received:', event.data);
+        // Add visible feedback for testing
+        document.body.insertAdjacentHTML('beforeend', 
+          `<div>SW Message: ${event.data}</div>`);
       });
+
+      // Send test message to SW
+      registration.active?.postMessage('Hello from page!');
       
-      console.log('ServiceWorker registration successful:', registration);
+      console.log('SW registered:', registration);
     } catch (error) {
-      console.error('ServiceWorker registration failed:', error);
+      console.error('SW registration failed:', error);
     }
   });
 }

@@ -108,3 +108,8 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
+self.addEventListener('message', (event) => {
+  console.log('SW received message:', event.data);
+  event.source?.postMessage('Message received by SW!');
+});
