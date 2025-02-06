@@ -8,11 +8,8 @@ const ASSETS = [
   '/audio/kapelle.mp3',
   '/audio/praezis-smart-digital.mp3',
   '/audio/stall-der-zukunft.mp3',
-  '/css/app.css',
-  '/js/app.js',
-  '/favicon.ico',
-  '/images/logo.svg',
-  '/fonts/Inter.woff2'
+  '/build/assets/app-JpraZMAh.css',
+  '/build/assets/app-MratX3S_.js',
 ];
 
 self.addEventListener('install', (event) => {
