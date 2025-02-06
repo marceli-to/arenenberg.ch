@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator) {
         await registration.unregister();
       }
 
-      const registration = await navigator.serviceWorker.register('/sw.js?update=true', {
+      const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       });
 
