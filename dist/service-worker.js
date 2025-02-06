@@ -1,22 +1,18 @@
 const CACHE_NAME = 'arenenberg-cache-v1';
 const STATIC_ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './audio/kapelle.mp3',
-  './audio/stall-der-zukunft.mp3',
-  './audio/praezis-smart-digital.mp3',
-  './audio/gartenbaukunst.mp3',
-  './audio/a-la-francaise.mp3'
+  '/stations/',
+  '/stations/index.html',
+  '/stations/manifest.json',
+  '/stations/audio/kapelle.mp3',
+  '/stations/audio/stall-der-zukunft.mp3',
+  '/stations/audio/praezis-smart-digital.mp3',
+  '/stations/audio/gartenbaukunst.mp3',
+  '/stations/audio/a-la-francaise.mp3'
 ];
 
 // Debug logging helper
-const log = (message, error = null) => {
-  if (error) {
-    console.error(`[ServiceWorker] ${message}`, error);
-  } else {
-    console.log(`[ServiceWorker] ${message}`);
-  }
+const log = (message) => {
+  console.log(`[ServiceWorker] ${message}`);
 };
 
 // Check if URL is valid for caching
@@ -35,28 +31,10 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        log('Attempting to cache static assets...');
-        // Cache assets one by one to identify problematic URLs
-        return Promise.all(
-          STATIC_ASSETS.map(url => {
-            return cache.add(url)
-              .then(() => log(`Successfully cached: ${url}`))
-              .catch(error => {
-                log(`Failed to cache: ${url}`, error);
-                // Don't throw the error to allow other assets to be cached
-                return Promise.resolve();
-              });
-          })
-        );
+        log('Caching static assets...');
+        return cache.addAll(STATIC_ASSETS);
       })
-      .then(() => {
-        log('Installation completed');
-        return self.skipWaiting();
-      })
-      .catch(error => {
-        log('Installation failed', error);
-        return Promise.resolve();
-      })
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -72,7 +50,6 @@ self.addEventListener('fetch', (event) => {
       // First try the cache
       const cachedResponse = await caches.match(event.request);
       if (cachedResponse) {
-        log(`Serving from cache: ${event.request.url}`);
         return cachedResponse;
       }
 
@@ -82,10 +59,8 @@ self.addEventListener('fetch', (event) => {
         
         // Only cache valid responses
         if (networkResponse && networkResponse.status === 200 && isValidUrl(event.request.url)) {
-          const responseToCache = networkResponse.clone();
           const cache = await caches.open(CACHE_NAME);
-          cache.put(event.request, responseToCache);
-          log(`Cached new response for: ${event.request.url}`);
+          cache.put(event.request, networkResponse.clone());
           return networkResponse;
         }
 
@@ -93,13 +68,12 @@ self.addEventListener('fetch', (event) => {
       } catch (error) {
         // If it's a navigation request, return index.html
         if (event.request.mode === 'navigate') {
-          const indexResponse = await caches.match('./index.html');
+          const indexResponse = await caches.match('/stations/index.html');
           if (indexResponse) {
             return indexResponse;
           }
         }
         
-        log(`Fetch failed for: ${event.request.url}`, error);
         throw error;
       }
     })()
@@ -108,20 +82,17 @@ self.addEventListener('fetch', (event) => {
 
 // Clean up old caches
 self.addEventListener('activate', (event) => {
-  log('Activating Service Worker...');
   event.waitUntil(
     Promise.all([
-      caches.keys()
-        .then(cacheNames => {
-          return Promise.all(
-            cacheNames.map(cacheName => {
-              if (cacheName !== CACHE_NAME) {
-                log(`Deleting old cache: ${cacheName}`);
-                return caches.delete(cacheName);
-              }
-            })
-          );
-        }),
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME) {
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      }),
       self.clients.claim()
     ])
   );
