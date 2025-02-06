@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arenenberg-cache-' + Date.now();
+const CACHE_NAME = 'arenenberg-cache-7';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
