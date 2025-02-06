@@ -107,6 +107,9 @@ class Deploy extends Command
     // generate unique hash
     $hash = \Str::random(20);
 
+    // use datetime string a hash
+    $hash = date('Y-m-d-H-i-s', time());
+
     $swContent = str_replace($key, "arenenberg-{$hash}", $swContent);
 
     file_put_contents($swPath, $swContent);
