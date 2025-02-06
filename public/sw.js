@@ -47,12 +47,7 @@ self.addEventListener('install', event => {
         ).then(results => {
           const allSuccessful = results.every(result => result.status === 'fulfilled');
           if (allSuccessful) {
-            console.log('all done');
-            // self.clients.matchAll().then(clients => {
-            //   clients.forEach(client => {
-            //     console.log(client);
-            //   });
-            // });
+            console.log('all done now really. pinky promise!');
           }
           
           results.forEach((result, index) => {
@@ -60,8 +55,6 @@ self.addEventListener('install', event => {
               console.error(`Failed to cache ${ASSETS[index]}`);
             } else {
               console.log(`Successfully cached ${ASSETS[index]}`);
-              const loader = client.document.querySelector('[data-loader]');
-              console.log(loader);
             }
           });
         });
