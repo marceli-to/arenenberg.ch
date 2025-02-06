@@ -11,7 +11,7 @@ const ASSETS = [
   '/audio/kapelle.mp3',
   '/audio/praezis-smart-digital.mp3',
   '/audio/stall-der-zukunft.mp3',
-  '/css/app.css',
+  '/build/assets/app-OBfdi90-.css',
   '/build/assets/app-MratX3S_.js',
   '/favicon.ico',
 ];
