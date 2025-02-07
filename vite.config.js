@@ -24,8 +24,9 @@ export default defineConfig({
     laravel({
       input: [
         'resources/css/app.css',
-        //'resources/js/app.js',
+        'resources/js/app.js',
         'resources/js/db.js',
+        'resources/js/station.js',
         'resources/js/sw.js',
       ],
       refresh: ['resources/views/**/*.blade.php'],
