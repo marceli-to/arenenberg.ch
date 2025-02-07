@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de" class="scroll-smooth overflow-y-auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arenenberg.ch</title>
+<meta name="description" content="PWA for arenenberg.ch">
+<meta property="og:title" content="arenenberg.ch">
+<meta property="og:description" content="PWA for arenenberg.ch">
+<meta property="og:url" content="https://arenenberg.ch.marceli.to/stationen/gartenbaukunst">
+<meta property="og:site_name" content="arenenberg.ch">
+<meta property="og:image" content="https://arenenberg.ch.marceli.to/opengraph.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="PWA for arenenberg.ch">
+<meta name="twitter:title" content="arenenberg.ch">
+<meta property="twitter:image" content="https://arenenberg.ch.marceli.to/opengraph.jpg">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<meta name="csrf-token" content="jLLZxvefOWRxst4LY9AjsKu6Ivq91wTUEaV4XmO2">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="manifest" href="/assets/manifest.json">
+<link rel="preload" as="style" href="https://arenenberg.ch.marceli.to/build/css/app.css" /><link rel="stylesheet" href="https://arenenberg.ch.marceli.to/build/css/app.css" /></head>
+
+<body class="bg-white text-black text-sm antialiased leading-[1.25] flex min-h-screen flex-col max-w-lg mx-auto">
+<header
+  class="sticky  top-0 left-0 z-40 w-full">
+  <div class="max-w-lg mx-auto bg-gray-100 p-10">
+    <nav>
+      <ul class="flex gap-x-15">
+        <li>
+          <a href="https://arenenberg.ch.marceli.to/index.html">Home</a>
+        </li>
+        <li>
+          <a href="https://arenenberg.ch.marceli.to/stationen/index.html">Stationen</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+  <main 
+  role="main" 
+  class="w-full flex-grow relative p-10 bg-gray-50">
+  <h1>Gartenbaukunst</h1>
+<div class="mt-20">
+  <audio controls id="audioPlayer">
+    <source type="audio/mpeg">
+  </audio>
+  <div id="status" class="status"></div>
+</div>
+<script src="/js/db.js"></script>
+<script src="/js/station.js"></script>
+<script>
+  loadStationAudio('kapelle.mp3');
+</script>
+</main>
+  <footer>
+</footer>
+</body>
+</html>
+<!-- made with ❤ by bivgrafik.ch & marceli.to -->

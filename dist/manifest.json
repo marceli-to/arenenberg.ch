@@ -1,0 +1,25 @@
+{
+  "resources/css/app.css": {
+    "file": "css/app.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "js/app2.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/db.js": {
+    "file": "js/db.js",
+    "name": "db",
+    "src": "resources/js/db.js",
+    "isEntry": true
+  },
+  "resources/js/sw.js": {
+    "file": "js/sw.js",
+    "name": "sw",
+    "src": "resources/js/sw.js",
+    "isEntry": true
+  }
+}
