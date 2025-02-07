@@ -3,9 +3,9 @@
 @section('content')
   <h1>Gartenbaukunst</h1>
   <div class="mt-20">
-    <audio controls>
+    <audio controls id="audioPlayer">
       <source src="/audio/gartenbaukunst.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
     </audio>
+    <div id="status" class="status"></div>
   </div>
 @endsection

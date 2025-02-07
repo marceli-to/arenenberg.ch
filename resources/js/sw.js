@@ -1,17 +1,5 @@
 const CACHE_NAME = 'arenenberg-cache-v1';
 const ASSETS_TO_CACHE = [
-  // '/',
-  // '/index.html',
-  // '/station1.html',
-  // '/station2.html',
-  // '/style.css',
-  // '/main.js',
-  // '/station.js',
-  // '/db.js',
-  // '/manifest.json',
-  // '/station1.mp3',
-  // '/station2.mp3'
-
   '/',
   '/index.html',
   '/stationen/index.html',
@@ -29,17 +17,55 @@ const ASSETS_TO_CACHE = [
   '/assets/js/station.js',
 ];
 
-self.addEventListener('install', (event) => {
+// self.addEventListener('install', (event) => {
+//   event.waitUntil(
+//     caches.open(CACHE_NAME)
+//       .then(cache => {
+//         return cache.addAll(ASSETS_TO_CACHE);
+//       })
+//       .then(() => {
+//         return self.skipWaiting(); // Force service worker to become active right away
+//       })
+//   );
+// });
+
+self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        return cache.addAll(ASSETS_TO_CACHE);
-      })
-      .then(() => {
-        return self.skipWaiting(); // Force service worker to become active right away
+        return Promise.allSettled(
+          ASSETS_TO_CACHE.map(asset => {
+            return cache.add(asset)
+              .catch(error => {
+                console.error(`Failed to cache ${asset}:`, error);
+                throw error;
+              });
+          })
+        ).then(results => {
+          const allSuccessful = results.every(result => result.status === 'fulfilled');
+          if (allSuccessful) {
+            console.log('all done now really. pinky promise!');
+            // Broadcast success message to all clients
+            self.clients.matchAll().then(clients => {
+              clients.forEach(client => {
+                client.postMessage('CACHING_COMPLETE');
+              });
+            });
+          }
+          
+          results.forEach((result, index) => {
+            if (result.status === 'rejected') {
+              console.error(`Failed to cache ${ASSETS_TO_CACHE[index]}`);
+            } else {
+              console.log(`Successfully cached ${ASSETS_TO_CACHE[index]}`);
+            }
+          });
+        });
       })
   );
 });
+
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
