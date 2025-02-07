@@ -15,8 +15,6 @@ async function loadStationAudio(fileName) {
         firstBytes.push(dataView.getUint8(i).toString(16).padStart(2, '0'));
       }
       console.log(`First bytes of audio file: ${firstBytes.join(' ')}`);
-      console.log('getAsset');
-
 
       // Create blob with explicit MIME type
       const blob = new Blob([audioData], { type: 'audio/mpeg' });

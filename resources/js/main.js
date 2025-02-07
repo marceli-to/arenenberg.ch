@@ -5,7 +5,10 @@ initDB().then(async () => {
   showStatus('Loading audio files...', 'info');
   try {
     // Preload both audio files
-    await preloadAudioFiles(['station1.mp3', 'station2.mp3']);
+    await preloadAudioFiles([
+      'audio/kapelle.mp3', 
+      'audio/praezis-smart-digital.mp3'
+    ]);
     showStatus('All audio files cached for offline use', 'success');
   } catch (error) {
     showStatus(`Error caching audio files: ${error}`, 'error');
