@@ -1,25 +1,7 @@
 {
   "resources/css/app.css": {
-    "file": "css/app.css",
+    "file": "assets/app-LzU8qnQ4.css",
     "src": "resources/css/app.css",
-    "isEntry": true
-  },
-  "resources/js/db.js": {
-    "file": "js/db.js",
-    "name": "db",
-    "src": "resources/js/db.js",
-    "isEntry": true
-  },
-  "resources/js/main.js": {
-    "file": "js/main.js",
-    "name": "main",
-    "src": "resources/js/main.js",
-    "isEntry": true
-  },
-  "resources/js/sw.js": {
-    "file": "js/sw.js",
-    "name": "sw",
-    "src": "resources/js/sw.js",
     "isEntry": true
   }
 }

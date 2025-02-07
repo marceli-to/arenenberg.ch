@@ -24,21 +24,11 @@ export default defineConfig({
     laravel({
       input: [
         'resources/css/app.css',
-        'resources/js/main.js',
-        'resources/js/db.js',
-        'resources/js/sw.js',
+        // 'resources/js/main.js',
+        // 'resources/js/db.js',
+        // 'resources/js/sw.js',
       ],
       refresh: ['resources/views/**/*.blade.php'],
     }),
   ],
-  build: {
-    outDir: 'public/build',
-    rollupOptions: {
-      output: {
-        assetFileNames: 'css/[name][extname]',
-        chunkFileNames: 'js/[name].js',
-        entryFileNames: 'js/[name].js',
-      },
-    },
-  },
 });
