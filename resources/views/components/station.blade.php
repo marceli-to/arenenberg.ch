@@ -1,3 +1,4 @@
+@props(['audio'])
 <div class="mt-20">
   <audio controls id="audioPlayer">
     <source type="audio/mpeg">
@@ -7,5 +8,5 @@
 <script src="/js/db.js"></script>
 <script src="/js/station.js"></script>
 <script>
-  loadStationAudio('kapelle.mp3');
+  loadStationAudio('{{ $audio }}');
 </script>
