@@ -29,7 +29,7 @@ export default defineConfig({
         'resources/js/sw.js',
       ],
       refresh: ['resources/views/**/*.blade.php'],
-      buildDirectory: 'public', // This removes the 'build' directory
+      buildDirectory: 'assets', // This removes the 'build' directory
     }),
   ],
   build: {
