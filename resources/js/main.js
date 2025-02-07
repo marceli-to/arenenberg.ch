@@ -7,7 +7,10 @@ initDB().then(async () => {
     // Preload both audio files
     await preloadAudioFiles([
       'audio/kapelle.mp3', 
-      'audio/praezis-smart-digital.mp3'
+      'audio/praezis-smart-digital.mp3',
+      'audio/a-la-francaise.mp3',
+      'audio/gartenbaukunst.mp3',
+      'audio/stall-der-zukunft.mp3',
     ]);
     showStatus('All audio files cached for offline use', 'success');
   } catch (error) {
