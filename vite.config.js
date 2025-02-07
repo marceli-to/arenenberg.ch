@@ -24,7 +24,7 @@ export default defineConfig({
     laravel({
       input: [
         'resources/css/app.css',
-        'resources/js/app.js',
+        'resources/js/main.js',
         'resources/js/db.js',
         'resources/js/station.js',
         'resources/js/sw.js',
