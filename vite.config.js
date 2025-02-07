@@ -29,21 +29,13 @@ export default defineConfig({
         'resources/js/sw.js',
       ],
       refresh: ['resources/views/**/*.blade.php'],
-      buildDirectory: 'assets', // This removes the 'build' directory
-      manifestFilename: '../manifest.json', // Move manifest up one directory
     }),
   ],
   build: {
-    outDir: 'public/assets', // Sets the base output directory to public
+    outDir: 'public/build',
     rollupOptions: {
         output: {
-            assetFileNames: (assetInfo) => {
-                let extType = assetInfo.name.split('.').at(1);
-                if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-                    extType = 'images';
-                }
-                return `${extType}/[name][extname]`;
-            },
+            assetFileNames: 'css/[name][extname]',
             chunkFileNames: 'js/[name].js',
             entryFileNames: 'js/[name].js',
         },

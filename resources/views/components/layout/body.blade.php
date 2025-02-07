@@ -3,7 +3,6 @@
 
 @vite('resources/js/db.js')
 @vite('resources/js/main.js')
-@vite('resources/js/station.js')
 </body>
 </html>
 <!-- made with ❤ by bivgrafik.ch & marceli.to -->
