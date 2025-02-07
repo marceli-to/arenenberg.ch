@@ -1,6 +1,6 @@
 <body class="bg-white text-black text-sm antialiased leading-[1.25] flex min-h-screen flex-col max-w-lg mx-auto">
 {{ $slot }}
-@if (!$request->routeIs('page.station.*'))
+@if (!Request::routeIs('page.station.*'))
   <script src="/js/db.js"></script>
   <script src="/js/main.js"></script>
 @endif
