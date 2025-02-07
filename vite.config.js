@@ -29,9 +29,11 @@ export default defineConfig({
         'resources/js/sw.js',
       ],
       refresh: ['resources/views/**/*.blade.php'],
+      buildDirectory: 'public', // This removes the 'build' directory
     }),
   ],
   build: {
+    outDir: 'public', // Sets the base output directory to public
     rollupOptions: {
         output: {
             assetFileNames: (assetInfo) => {
