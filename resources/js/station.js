@@ -1,5 +1,5 @@
 // Function to load station audio from IndexedDB
-export async function loadStationAudio(fileName) {
+async function loadStationAudio(fileName) {
   const audioElement = document.getElementById('audioPlayer');
   
   try {
