@@ -31,6 +31,7 @@ export default defineConfig({
       ],
       refresh: ['resources/views/**/*.blade.php'],
       buildDirectory: 'assets', // This removes the 'build' directory
+      manifestFilename: '../manifest.json', // Move manifest up one directory
     }),
   ],
   build: {
