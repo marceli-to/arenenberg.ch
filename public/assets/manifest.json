@@ -4,12 +4,6 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/js/app.js": {
-    "file": "js/app2.js",
-    "name": "app",
-    "src": "resources/js/app.js",
-    "isEntry": true
-  },
   "resources/js/db.js": {
     "file": "js/db.js",
     "name": "db",
