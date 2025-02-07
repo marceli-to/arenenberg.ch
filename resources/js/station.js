@@ -1,4 +1,4 @@
-export async function loadStationAudio(fileName) {
+async function loadStationAudio(fileName) {
   const audioElement = document.getElementById('audioPlayer');
   
   try {
