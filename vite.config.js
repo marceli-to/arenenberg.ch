@@ -25,9 +25,25 @@ export default defineConfig({
       input: [
         'resources/css/app.css',
         'resources/js/app.js',
+        'resources/js/db.js',
         'resources/js/sw.js',
       ],
       refresh: ['resources/views/**/*.blade.php'],
     }),
   ],
+  build: {
+    rollupOptions: {
+        output: {
+            assetFileNames: (assetInfo) => {
+                let extType = assetInfo.name.split('.').at(1);
+                if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+                    extType = 'images';
+                }
+                return `${extType}/[name][extname]`;
+            },
+            chunkFileNames: 'js/[name].js',
+            entryFileNames: 'js/[name].js',
+        },
+    },
+},
 });

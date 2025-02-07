@@ -9,5 +9,11 @@
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
+  },
+  "resources/js/sw.js": {
+    "file": "assets/sw-CQ7rgNG2.js",
+    "name": "sw",
+    "src": "resources/js/sw.js",
+    "isEntry": true
   }
 }
