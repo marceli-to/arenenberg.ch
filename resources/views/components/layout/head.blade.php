@@ -32,7 +32,7 @@ $opengraph_image = 'opengraph.jpg';
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="/assets/manifest.json">
 @vite('resources/css/app.css')
 </head>
 
