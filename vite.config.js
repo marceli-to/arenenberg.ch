@@ -33,7 +33,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: 'assets', // Sets the base output directory to public
+    outDir: 'public/assets', // Sets the base output directory to public
     rollupOptions: {
         output: {
             assetFileNames: (assetInfo) => {
