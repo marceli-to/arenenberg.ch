@@ -25,7 +25,6 @@ export default defineConfig({
       input: [
         'resources/css/app.css',
         'resources/js/main.js',
-        'resources/js/station.js',
         'resources/js/db.js',
         'resources/js/sw.js',
       ],
@@ -35,11 +34,11 @@ export default defineConfig({
   build: {
     outDir: 'public/build',
     rollupOptions: {
-        output: {
-            assetFileNames: 'css/[name][extname]',
-            chunkFileNames: 'js/[name].js',
-            entryFileNames: 'js/[name].js',
-        },
+      output: {
+        assetFileNames: 'css/[name][extname]',
+        chunkFileNames: 'js/[name].js',
+        entryFileNames: 'js/[name].js',
+      },
     },
-},
+  },
 });

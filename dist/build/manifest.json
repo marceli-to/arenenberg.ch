@@ -16,6 +16,12 @@
     "src": "resources/js/main.js",
     "isEntry": true
   },
+  "resources/js/station.js": {
+    "file": "js/station.js",
+    "name": "station",
+    "src": "resources/js/station.js",
+    "isEntry": true
+  },
   "resources/js/sw.js": {
     "file": "js/sw.js",
     "name": "sw",
