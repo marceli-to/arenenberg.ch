@@ -25,6 +25,7 @@ export default defineConfig({
       input: [
         'resources/css/app.css',
         'resources/js/main.js',
+        'resources/js/station.js',
         'resources/js/db.js',
         'resources/js/sw.js',
       ],
