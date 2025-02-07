@@ -5,7 +5,9 @@
   <div id="status" class="status"></div>
 </div>
 @vite('resources/js/db.js')
-<script>
+<script type="module">
+import { initDB, getAsset } from '/build/js/db.js';
+
 async function loadStationAudio(fileName) {
   const audioElement = document.getElementById('audioPlayer');
   
