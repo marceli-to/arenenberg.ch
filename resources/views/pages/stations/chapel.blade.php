@@ -8,8 +8,6 @@
   </audio>
   <div id="status" class="status"></div>
 </div>
-@vite('resources/js/db.js')
-@vite('resources/js/station.js')
 <script>
   // add document ready listener with vanilla js
   document.addEventListener('DOMContentLoaded', function() {
